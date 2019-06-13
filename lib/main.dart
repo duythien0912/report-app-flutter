@@ -4,11 +4,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 import 'new_feedback.dart';
 // import 'package:flutter/services.dart';
 
+class MainModel with ChangeNotifier {
+  List<File> _listImage = [];
+  List<File> get listImage => _listImage;
+
+  void pushToListImage(File newFile) {
+    _listImage.add(newFile);
+    notifyListeners();
+  }
+}
+
 void main() {
+  Provider.debugCheckInvalidValueType = null;
+
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   //     // systemNavigationBarColor: Colors.blue, // navigation bar color
   //     // statusBarColor: Colors.pink, // status bar color
@@ -20,14 +33,19 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        // accentColorBrightness: Brightness.light,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => MainModel()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          // accentColorBrightness: Brightness.light,
+        ),
+        home: ChatPage(),
       ),
-      home: ChatPage(),
     );
   }
 }
@@ -241,7 +259,7 @@ class CustomFeedback extends StatelessWidget {
                 ),
                 child: TextField(
                   decoration: new InputDecoration(
-                    hintText: "Chia sẻ cảm nghĩ của bạn tại đây",
+                    hintText: "Chia sẻ cảm nghĩ của bạn t�����i đây",
                     hintStyle: TextStyle(
                       fontSize: 14,
                     ),
@@ -299,6 +317,8 @@ enum ConfirmAction { CAMERA, GALLERY }
 class _PickImageRowState extends State<PickImageRow> {
   @override
   Widget build(BuildContext context) {
+    final MainModel mainModel = Provider.of<MainModel>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -316,7 +336,13 @@ class _PickImageRowState extends State<PickImageRow> {
           spacing: 6,
           runSpacing: 6,
           children: <Widget>[
-            new UploadBox(),
+            ...[
+              new UploadBox(),
+            ],
+            if (mainModel.listImage.isNotEmpty)
+              ...mainModel.listImage.map((index) {
+                return UploadBox(image: index);
+              }).toList()
           ],
         ),
       ],
@@ -327,14 +353,17 @@ class _PickImageRowState extends State<PickImageRow> {
 class UploadBox extends StatefulWidget {
   const UploadBox({
     Key key,
+    this.image,
   }) : super(key: key);
+
+  final File image;
 
   @override
   _UploadBoxState createState() => _UploadBoxState();
 }
 
 class _UploadBoxState extends State<UploadBox> {
-  File _image;
+  // File _image;
 
   void showDemoActionSheet({BuildContext context, Widget child}) {
     showCupertinoModalPopup<String>(
@@ -347,9 +376,7 @@ class _UploadBoxState extends State<UploadBox> {
     });
   }
 
-  Future getImage() async {
-    File image;
-
+  Future getImage(MainModel mainModel) async {
     showDemoActionSheet(
       context: context,
       child: CupertinoActionSheet(
@@ -361,22 +388,20 @@ class _UploadBoxState extends State<UploadBox> {
             child: const Text('Máy ảnh'),
             onPressed: () async {
               Navigator.pop(context, 'Máy ảnh');
-              image = await ImagePicker.pickImage(source: ImageSource.camera);
+              File image =
+                  await ImagePicker.pickImage(source: ImageSource.camera);
 
-              setState(() {
-                _image = image;
-              });
+              mainModel.pushToListImage(image);
             },
           ),
           CupertinoActionSheetAction(
             child: const Text('Thư viện'),
             onPressed: () async {
               Navigator.pop(context, 'Thư viện');
-              image = await ImagePicker.pickImage(source: ImageSource.gallery);
+              File image =
+                  await ImagePicker.pickImage(source: ImageSource.gallery);
 
-              setState(() {
-                _image = image;
-              });
+              mainModel.pushToListImage(image);
             },
           ),
         ],
@@ -396,11 +421,11 @@ class _UploadBoxState extends State<UploadBox> {
     double width = MediaQuery.of(context).size.width;
 
     double widthMinus = width - 16 * 2 - 6 * 3;
-    // _image != null ? Image.file(_image) : Container(),
+    final MainModel mainModel = Provider.of<MainModel>(context);
 
     return GestureDetector(
       onTap: () {
-        getImage();
+        getImage(mainModel);
       },
       child: Container(
         height: widthMinus / 4,
@@ -409,17 +434,22 @@ class _UploadBoxState extends State<UploadBox> {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,
-            color: Colors.green,
+            color: widget.image == null ? Colors.green : Colors.transparent,
             style: BorderStyle.solid,
           ),
           borderRadius: BorderRadius.circular(
             6.0,
           ),
         ),
-        child: Icon(
-          Icons.add,
-          color: Colors.green,
-        ),
+        child: widget.image == null
+            ? Icon(
+                Icons.add,
+                color: Colors.green,
+              )
+            : Image.file(
+                widget.image,
+                fit: BoxFit.fitHeight,
+              ),
       ),
     );
   }
