@@ -258,6 +258,8 @@ class CustomFeedback extends StatelessWidget {
                   vertical: 6,
                 ),
                 child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 2,
                   decoration: new InputDecoration(
                     hintText: "Chia sẻ cảm nghĩ của bạn t�����i đây",
                     hintStyle: TextStyle(
