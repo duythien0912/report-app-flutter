@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'chat_card.dart';
+import 'chat_card_2.dart';
 import 'custom_feedback.dart';
 import 'new_feedback.dart';
 

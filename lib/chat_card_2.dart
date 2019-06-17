@@ -13,6 +13,8 @@ class ChatCard extends StatelessWidget {
     // DateTime date = new DateTime(now.year, now.month, now.day);
     double c_width = MediaQuery.of(context).size.width;
 
+    double triSize = 30;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -24,7 +26,7 @@ class ChatCard extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(
-          bottom: 10,
+          bottom: 0,
         ),
         height: 135,
         child: Stack(
@@ -152,34 +154,52 @@ class ChatCard extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment(1.1, 1.6),
-              child: ClipOval(
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                alignment: Alignment(1, 1),
                 child: Container(
-                  height: 55,
-                  width: 55,
-                  color: Color.fromRGBO(243, 243, 243, 1),
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment(0.98, 1.25),
-              child: ClipOval(
-                child: Container(
-                  height: 55,
-                  width: 55,
+                  height: triSize,
+                  width: triSize,
                   color: Colors.blue,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                        "Đang xử lý",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                alignment: Alignment(1, 1),
+                child: ClipPath(
+                  clipper: TriangleClipper(),
+                  child: Container(
+                    height: triSize + 1,
+                    width: triSize + 1,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                alignment: Alignment(1, -1),
+                child: Container(
+                  padding: EdgeInsets.only(right: 2.5),
+                  height: double.infinity,
+                  width: 20,
+                  color: Colors.blue,
+                  child: RotatedBox(
+                    quarterTurns: 1,
+                    child: Text(
+                      "Đang xử lý",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -191,6 +211,27 @@ class ChatCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class TriangleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(size.height, 0);
+    path.lineTo(0, size.width);
+    // path.lineTo(size.width, size.height / 2);
+
+    // path.lineTo(0.0, size.height - 20);
+
+    // path.lineTo(size.width, size.height - 40);
+    // path.lineTo(size.width, 0.0);
+
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(TriangleClipper oldClipper) => false;
 }
 
 class CategoryText extends StatelessWidget {

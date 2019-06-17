@@ -30,7 +30,7 @@ class _SelectCategoryState extends State<SelectCategory> {
   ScrollController _controller;
 
   bool isReachRight = false;
-  bool isReachLeft = false;
+  bool isReachLeft = true;
 
   @override
   void initState() {
