@@ -54,7 +54,7 @@ class ChatCard extends StatelessWidget {
                 padding: new EdgeInsets.only(
                   top: 12.0,
                   bottom: 12,
-                  left: 6,
+                  left: 10,
                   right: 0,
                 ),
                 child: Row(
