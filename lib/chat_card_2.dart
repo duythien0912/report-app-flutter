@@ -44,12 +44,12 @@ class ChatCard extends StatelessWidget {
                     //   color: Colors.black12,
                     // ),
                   ],
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 2.0,
-                      color: Colors.blue,
-                    ),
-                  ),
+                  // border: Border(
+                  //   bottom: BorderSide(
+                  //     width: 2.0,
+                  //     color: Colors.blue,
+                  //   ),
+                  // ),
                 ),
                 padding: new EdgeInsets.only(
                   top: 12.0,
@@ -169,44 +169,67 @@ class ChatCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(4),
               child: Container(
                 alignment: Alignment(1, 1),
                 child: ClipPath(
+                  clipBehavior: Clip.hardEdge,
                   clipper: TriangleClipper(),
                   child: Container(
-                    height: triSize + 1,
-                    width: triSize + 1,
+                    height: triSize,
+                    width: triSize,
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
+            new HorizontalTextBar(),
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Container(
-                alignment: Alignment(1, -1),
+                alignment: Alignment(-1, 1),
                 child: Container(
-                  padding: EdgeInsets.only(right: 2.5),
-                  height: double.infinity,
-                  width: 20,
+                  height: 2,
+                  width: double.infinity,
                   color: Colors.blue,
-                  child: RotatedBox(
-                    quarterTurns: 1,
-                    child: Text(
-                      "Đang xử lý",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class HorizontalTextBar extends StatelessWidget {
+  const HorizontalTextBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        alignment: Alignment(1, -1),
+        child: Container(
+          padding: EdgeInsets.only(right: 2.5),
+          height: double.infinity,
+          width: 20,
+          color: Colors.blue,
+          child: RotatedBox(
+            quarterTurns: 1,
+            child: Text(
+              "Đang xử lý",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -219,12 +242,6 @@ class TriangleClipper extends CustomClipper<Path> {
     final path = Path();
     path.lineTo(size.height, 0);
     path.lineTo(0, size.width);
-    // path.lineTo(size.width, size.height / 2);
-
-    // path.lineTo(0.0, size.height - 20);
-
-    // path.lineTo(size.width, size.height - 40);
-    // path.lineTo(size.width, 0.0);
 
     path.close();
     return path;
