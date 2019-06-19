@@ -11,12 +11,19 @@ enum FieldReport {
   Other,
 }
 
+enum ProcessingStatus {
+  Processing,
+  Finished,
+  SpamReport,
+}
+
 class ReportInfoItem {
   FieldReport fieldReport;
   String timeHasPassed;
   String busStopName;
   String reportContent;
   String image;
+  ProcessingStatus processingStatus;
 
   ReportInfoItem({
     this.fieldReport,
@@ -24,6 +31,7 @@ class ReportInfoItem {
     this.busStopName,
     this.reportContent,
     this.image,
+    this.processingStatus,
   });
 }
 
@@ -45,12 +53,14 @@ class _ChatPageState extends State<ChatPage> {
       timeHasPassed: "2 giờ trước",
       image:
           "https://vntrip.cdn.vccloud.vn/cam-nang/wp-content/uploads/2017/08/xe-bus.png",
+      processingStatus: ProcessingStatus.Processing,
     ),
     ReportInfoItem(
       fieldReport: FieldReport.App,
       busStopName: "Bimos",
       reportContent: "App cùi vl",
       timeHasPassed: "15 phút trước",
+      processingStatus: ProcessingStatus.SpamReport,
     ),
     ReportInfoItem(
       fieldReport: FieldReport.Driver,
@@ -59,12 +69,14 @@ class _ChatPageState extends State<ChatPage> {
       timeHasPassed: "1 giờ trước",
       image:
           "http://cdn.baogiaothong.vn/files/news/2018/08/10/183936-xe-buyt-gay-su.jpg",
+      processingStatus: ProcessingStatus.Finished,
     ),
     ReportInfoItem(
       fieldReport: FieldReport.Station,
       busStopName: "Bến xe bus trường skpt",
       reportContent: "Bến xe đông quá.",
       timeHasPassed: "10 ngày trước",
+      processingStatus: ProcessingStatus.SpamReport,
     ),
     ReportInfoItem(
       fieldReport: FieldReport.Other,
@@ -114,7 +126,7 @@ class _ChatPageState extends State<ChatPage> {
       floatingActionButton: Container(
         // width: 200.0,
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(
             12.0,
           ),
@@ -169,8 +181,14 @@ class _ChatPageState extends State<ChatPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    BackButton(
-                      color: Colors.white,
+                    // !_scaffoldKey.currentState.hasDrawer
+                    //     ? BackButton(
+                    //         color: Colors.white,
+                    //       )
+                    //     :
+                    SizedBox(
+                      height: 24,
+                      width: 24,
                     ),
                     Expanded(
                       child: TextField(

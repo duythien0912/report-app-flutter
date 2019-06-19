@@ -47,8 +47,11 @@ class _UploadBoxState extends State<UploadBox> {
               Navigator.pop(context, 'Máy ảnh');
               File image =
                   await ImagePicker.pickImage(source: ImageSource.camera);
-
-              mainModel.pushToListImage(image);
+              if (image != null) {
+                if (image.existsSync()) {
+                  mainModel.pushToListImage(image);
+                }
+              }
             },
           ),
           CupertinoActionSheetAction(
@@ -57,8 +60,11 @@ class _UploadBoxState extends State<UploadBox> {
               Navigator.pop(context, 'Thư viện');
               File image =
                   await ImagePicker.pickImage(source: ImageSource.gallery);
-
-              mainModel.pushToListImage(image);
+              if (image != null) {
+                if (image.existsSync()) {
+                  mainModel.pushToListImage(image);
+                }
+              }
             },
           ),
         ],

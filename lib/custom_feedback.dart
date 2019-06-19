@@ -9,12 +9,12 @@ class CustomFeedback extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Container(
           // controller: controller,
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
 
             children: <Widget>[
               BackButton(),
@@ -52,7 +52,7 @@ class CustomFeedback extends StatelessWidget {
                 ),
                 child: TextField(
                   keyboardType: TextInputType.multiline,
-                  maxLines: 2,
+                  maxLines: 4,
                   decoration: new InputDecoration(
                     hintText: "Chia sẻ cảm nghĩ của bạn tại đây",
                     hintStyle: TextStyle(
@@ -64,10 +64,14 @@ class CustomFeedback extends StatelessWidget {
                 ),
               ),
 
+              Expanded(
+                child: SizedBox(),
+              ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16.0,
-                  vertical: 6,
+                  vertical: 20,
                 ),
                 child: Container(
                   // padding: EdgeInsets.all(8),

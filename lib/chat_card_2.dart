@@ -1,6 +1,5 @@
 import 'package:feedback_app/chat_page.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import 'page/message_page.dart';
 
@@ -12,6 +11,31 @@ class ChatCard extends StatelessWidget {
 
   final ReportInfoItem reportInfo;
 
+  getColorReport(ProcessingStatus processingStatus, String type) {
+    print(processingStatus);
+    switch (processingStatus) {
+      case ProcessingStatus.Processing:
+        if (type == 'color') return Colors.blue;
+        if (type == 'text') return 'Đang xử lý';
+        break;
+      case ProcessingStatus.Finished:
+        if (type == 'color') return Colors.green;
+        if (type == 'text') return 'Hoàn thành';
+
+        break;
+      case ProcessingStatus.SpamReport:
+        if (type == 'color') return Colors.blueGrey;
+        if (type == 'text') return 'Báo cáo ảo';
+
+        break;
+      default:
+        if (type == 'color') return Colors.orange;
+        if (type == 'text') return 'Khác';
+
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // DateTime now = new DateTime.now();
@@ -19,6 +43,16 @@ class ChatCard extends StatelessWidget {
     double c_width = MediaQuery.of(context).size.width;
 
     double triSize = 30;
+
+    Color colorReport = getColorReport(
+      reportInfo.processingStatus,
+      'color',
+    );
+
+    String statusReport = getColorReport(
+      reportInfo.processingStatus,
+      'text',
+    );
 
     return GestureDetector(
       onTap: () {
@@ -55,7 +89,7 @@ class ChatCard extends StatelessWidget {
                     // border: Border(
                     //   bottom: BorderSide(
                     //     width: 2.0,
-                    //     color: Colors.blue,
+                    //     color: colorReport,
                     //   ),
                     // ),
                   ),
@@ -71,17 +105,19 @@ class ChatCard extends StatelessWidget {
                     children: <Widget>[
                       ClipOval(
                         child: Container(
-                          padding: EdgeInsets.all(8),
+                          height: c_width / 5,
+                          width: c_width / 5,
+                          // padding: EdgeInsets.all(8),
                           decoration: new BoxDecoration(
                             color: Colors.black12,
-                            image: DecorationImage(
-                              image: reportInfo.image == null
-                                  ? AssetImage("assets/holder.png")
-                                  : FadeInImage.assetNetwork(
-                                      placeholder: 'assets/holder.png',
-                                      image: reportInfo.image,
-                                    ),
-                            ),
+                            // image: DecorationImage(
+                            //   fit: BoxFit.fitHeight,
+                            //   image: reportInfo.image == null
+                            //       ? AssetImage("assets/holder.png")
+                            //       : NetworkImage(
+                            //           reportInfo.image,
+                            //         ),
+                            // ),
                             // boxShadow: [
                             //   new BoxShadow(
                             //     // offset: Offset(1, 3),
@@ -95,15 +131,24 @@ class ChatCard extends StatelessWidget {
                               // FlutterLogo(
                               //   size: 35,
                               // ),
-                              //     Image.asset(
-                              //   "assets/holder.png",
-                              //   height: 35,
-                              //   fit: BoxFit.contain,
-                              // ),
-                              SizedBox(
-                            height: 35,
-                            width: 35,
-                          ),
+                              reportInfo.image == null
+                                  ? Image.asset(
+                                      "assets/holder.png",
+                                      height: c_width / 5,
+                                      width: c_width / 5,
+                                      fit: BoxFit.fitHeight,
+                                    )
+                                  : FadeInImage.assetNetwork(
+                                      height: c_width / 5,
+                                      width: c_width / 5,
+                                      fit: BoxFit.fitHeight,
+                                      placeholder: 'assets/holder.png',
+                                      image: reportInfo.image,
+                                    ),
+                          //     SizedBox(
+                          //   height: 50,
+                          //   width: 50,
+                          // ),
                         ),
                       ),
                       Padding(
@@ -181,7 +226,7 @@ class ChatCard extends StatelessWidget {
                 child: Container(
                   height: triSize,
                   width: triSize,
-                  color: Colors.blue,
+                  color: colorReport,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                   ),
@@ -203,7 +248,8 @@ class ChatCard extends StatelessWidget {
                 ),
               ),
             ),
-            new HorizontalTextBar(),
+            new HorizontalTextBar(
+                colorReport: colorReport, statusReport: statusReport),
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Container(
@@ -211,7 +257,7 @@ class ChatCard extends StatelessWidget {
                 child: Container(
                   height: 2,
                   width: double.infinity,
-                  color: Colors.blue,
+                  color: colorReport,
                 ),
               ),
             ),
@@ -225,7 +271,12 @@ class ChatCard extends StatelessWidget {
 class HorizontalTextBar extends StatelessWidget {
   const HorizontalTextBar({
     Key key,
+    this.colorReport,
+    this.statusReport,
   }) : super(key: key);
+
+  final Color colorReport;
+  final String statusReport;
 
   @override
   Widget build(BuildContext context) {
@@ -237,11 +288,11 @@ class HorizontalTextBar extends StatelessWidget {
           padding: EdgeInsets.only(right: 2.5),
           height: double.infinity,
           width: 20,
-          color: Colors.blue,
+          color: colorReport,
           child: RotatedBox(
             quarterTurns: 1,
             child: Text(
-              "Đang xử lý",
+              statusReport,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
