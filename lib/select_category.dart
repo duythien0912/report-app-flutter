@@ -16,6 +16,8 @@ class SelectCategory extends StatefulWidget {
 }
 
 class _SelectCategoryState extends State<SelectCategory> {
+  bool isReachLeft = true;
+  bool isReachRight = false;
   List<SupItem> reportList = [
     SupItem(index: 1, image: "assets/bus.png", name: "Xe"),
     SupItem(index: 2, image: "assets/driver1.png", name: "Tài Xế"),
@@ -28,9 +30,6 @@ class _SelectCategoryState extends State<SelectCategory> {
 
   // List<int> selectedChoices = List();
   ScrollController _controller;
-
-  bool isReachRight = false;
-  bool isReachLeft = true;
 
   @override
   void initState() {

@@ -1,11 +1,16 @@
+import 'package:feedback_app/chat_page.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'page/message_page.dart';
 
 class ChatCard extends StatelessWidget {
   const ChatCard({
     Key key,
+    this.reportInfo,
   }) : super(key: key);
+
+  final ReportInfoItem reportInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -28,129 +33,144 @@ class ChatCard extends StatelessWidget {
         margin: EdgeInsets.only(
           bottom: 0,
         ),
-        height: 135,
+        height: 110,
         child: Stack(
+          // fit: StackFit.passthrough,
           children: <Widget>[
-            new Card(
-              // borderOnForeground: true,
-              child: new Container(
-                decoration: new BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    // new BoxShadow(
-                    //   blurRadius: 3.0,
-                    //   offset: new Offset(0.0, 3.0),
-                    //   spreadRadius: 0.5,
-                    //   color: Colors.black12,
+            Container(
+              width: double.infinity,
+              child: new Card(
+                // borderOnForeground: true,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      // new BoxShadow(
+                      //   blurRadius: 3.0,
+                      //   offset: new Offset(0.0, 3.0),
+                      //   spreadRadius: 0.5,
+                      //   color: Colors.black12,
+                      // ),
+                    ],
+                    // border: Border(
+                    //   bottom: BorderSide(
+                    //     width: 2.0,
+                    //     color: Colors.blue,
+                    //   ),
                     // ),
-                  ],
-                  // border: Border(
-                  //   bottom: BorderSide(
-                  //     width: 2.0,
-                  //     color: Colors.blue,
-                  //   ),
-                  // ),
-                ),
-                padding: new EdgeInsets.only(
-                  top: 12.0,
-                  bottom: 12,
-                  left: 10,
-                  right: 0,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    ClipOval(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: new BoxDecoration(
-                          color: Colors.black12,
-                          image: DecorationImage(
-                            image: AssetImage("assets/holder.png"),
+                  ),
+                  padding: new EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12,
+                    left: 10,
+                    right: 0,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      ClipOval(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: new BoxDecoration(
+                            color: Colors.black12,
+                            image: DecorationImage(
+                              image: reportInfo.image == null
+                                  ? AssetImage("assets/holder.png")
+                                  : FadeInImage.assetNetwork(
+                                      placeholder: 'assets/holder.png',
+                                      image: reportInfo.image,
+                                    ),
+                            ),
+                            // boxShadow: [
+                            //   new BoxShadow(
+                            //     // offset: Offset(1, 3),
+                            //     spreadRadius: 1,
+                            //     color: Colors.black12,
+                            //     blurRadius: 3.0,
+                            //   ),
+                            // ],
                           ),
-                          // boxShadow: [
-                          //   new BoxShadow(
-                          //     // offset: Offset(1, 3),
-                          //     spreadRadius: 1,
-                          //     color: Colors.black12,
-                          //     blurRadius: 3.0,
-                          //   ),
-                          // ],
-                        ),
-                        child:
-                            // FlutterLogo(
-                            //   size: 35,
-                            // ),
-                            //     Image.asset(
-                            //   "assets/holder.png",
-                            //   height: 35,
-                            //   fit: BoxFit.contain,
-                            // ),
-                            SizedBox(
-                          height: 35,
-                          width: 35,
+                          child:
+                              // FlutterLogo(
+                              //   size: 35,
+                              // ),
+                              //     Image.asset(
+                              //   "assets/holder.png",
+                              //   height: 35,
+                              //   fit: BoxFit.contain,
+                              // ),
+                              SizedBox(
+                            height: 35,
+                            width: 35,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                    ),
-                    new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            new CategoryText(),
-                            Padding(
-                              padding: EdgeInsets.only(left: 10),
-                            ),
-                            new TimeText(),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 5),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.location_on,
-                              size: 20,
-                              color: Colors.red,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                new CategoryText(
+                                  fieldReport: reportInfo.fieldReport,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(right: 25),
+                                  child: TimeText(
+                                      timeHasPassed: reportInfo.timeHasPassed),
+                                ),
+                              ],
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 5),
+                              padding: EdgeInsets.only(top: 5),
                             ),
-                            Text(
-                              "Bến số 11",
-                              style: TextStyle(
-                                // fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.location_on,
+                                  size: 20,
+                                  color: Colors.red,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5),
+                                ),
+                                Text(
+                                  reportInfo.busStopName,
+                                  style: TextStyle(
+                                    // fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 5),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              width: c_width - 111,
+                              // height: 45,
+                              child: new Text(
+                                reportInfo.reportContent,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 5),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(right: 12.0),
-                          width: c_width - 111,
-                          height: 45,
-                          child: new Text(
-                            "Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, ",
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -254,7 +274,109 @@ class TriangleClipper extends CustomClipper<Path> {
 class CategoryText extends StatelessWidget {
   const CategoryText({
     Key key,
+    this.fieldReport,
   }) : super(key: key);
+
+  final FieldReport fieldReport;
+
+  selectImage(type) {
+    switch (fieldReport) {
+      case FieldReport.Bus:
+        {
+          if (type == 'image')
+            return Image.asset(
+              "assets/bus.png",
+              fit: BoxFit.cover,
+            );
+          if (type == 'text')
+            return Text(
+              'Xe bus',
+              style: TextStyle(
+                // fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+        }
+        break;
+
+      case FieldReport.App:
+        {
+          if (type == 'image')
+            return Image.asset(
+              "assets/app1.png",
+              fit: BoxFit.cover,
+            );
+          if (type == 'text')
+            return Text(
+              'Ứng dụng',
+              style: TextStyle(
+                // fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+        }
+        break;
+
+      case FieldReport.Driver:
+        {
+          if (type == 'image')
+            return Image.asset(
+              "assets/driver1.png",
+              fit: BoxFit.cover,
+            );
+          if (type == 'text')
+            return Text(
+              'Tài xế',
+              style: TextStyle(
+                // fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+        }
+        break;
+
+      case FieldReport.Station:
+        {
+          if (type == 'image')
+            return Image.asset(
+              "assets/bus_stop1.png",
+              fit: BoxFit.cover,
+            );
+          if (type == 'text')
+            return Text(
+              'Bến xe',
+              style: TextStyle(
+                // fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+        }
+        break;
+
+      case FieldReport.Other:
+        {
+          if (type == 'image')
+            return Image.asset(
+              "assets/404.png",
+              fit: BoxFit.cover,
+            );
+          if (type == 'text')
+            return Text(
+              'Khác',
+              style: TextStyle(
+                // fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+        }
+        break;
+      default:
+        {
+          return Container();
+        }
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -263,17 +385,10 @@ class CategoryText extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(right: 5),
           // height: 20,
-          width: 20,
-          child: Image.asset(
-            "assets/bus.png",
-            fit: BoxFit.cover,
-          ),
+          height: 20,
+          child: selectImage("image"),
         ),
-        new Text('Xe bus dơ',
-            style: TextStyle(
-              // fontSize: 14,
-              fontWeight: FontWeight.w600,
-            )),
+        selectImage('text'),
       ],
     );
   }
@@ -282,7 +397,10 @@ class CategoryText extends StatelessWidget {
 class TimeText extends StatelessWidget {
   const TimeText({
     Key key,
+    this.timeHasPassed,
   }) : super(key: key);
+
+  final String timeHasPassed;
 
   @override
   Widget build(BuildContext context) {
@@ -296,11 +414,13 @@ class TimeText extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 5),
         ),
-        Text("2 giờ trước",
-            style: TextStyle(
-              // fontSize: 12,
-              fontWeight: FontWeight.w600,
-            )),
+        Text(
+          timeHasPassed,
+          style: TextStyle(
+            // fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ],
     );
   }

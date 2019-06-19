@@ -9,8 +9,6 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // DateTime now = new DateTime.now();
-    // DateTime date = new DateTime(now.year, now.month, now.day);
     double c_width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
@@ -30,18 +28,10 @@ class ChatCard extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             new Card(
-              // borderOnForeground: true,
               child: new Container(
                 decoration: new BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [
-                    // new BoxShadow(
-                    //   blurRadius: 3.0,
-                    //   offset: new Offset(0.0, 3.0),
-                    //   spreadRadius: 0.5,
-                    //   color: Colors.black12,
-                    // ),
-                  ],
+                  boxShadow: [],
                   border: Border(
                     bottom: BorderSide(
                       width: 2.0,
@@ -67,25 +57,8 @@ class ChatCard extends StatelessWidget {
                           image: DecorationImage(
                             image: AssetImage("assets/holder.png"),
                           ),
-                          // boxShadow: [
-                          //   new BoxShadow(
-                          //     // offset: Offset(1, 3),
-                          //     spreadRadius: 1,
-                          //     color: Colors.black12,
-                          //     blurRadius: 3.0,
-                          //   ),
-                          // ],
                         ),
-                        child:
-                            // FlutterLogo(
-                            //   size: 35,
-                            // ),
-                            //     Image.asset(
-                            //   "assets/holder.png",
-                            //   height: 35,
-                            //   fit: BoxFit.contain,
-                            // ),
-                            SizedBox(
+                        child: SizedBox(
                           height: 35,
                           width: 35,
                         ),
@@ -124,7 +97,6 @@ class ChatCard extends StatelessWidget {
                             Text(
                               "Bến số 11",
                               style: TextStyle(
-                                // fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -204,7 +176,6 @@ class CategoryText extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(right: 5),
-          // height: 20,
           width: 20,
           child: Image.asset(
             "assets/bus.png",
@@ -213,7 +184,6 @@ class CategoryText extends StatelessWidget {
         ),
         new Text('Xe bus dơ',
             style: TextStyle(
-              // fontSize: 14,
               fontWeight: FontWeight.w600,
             )),
       ],
@@ -240,7 +210,6 @@ class TimeText extends StatelessWidget {
         ),
         Text("2 giờ trước",
             style: TextStyle(
-              // fontSize: 12,
               fontWeight: FontWeight.w600,
             )),
       ],
