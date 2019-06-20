@@ -9,7 +9,7 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double c_width = MediaQuery.of(context).size.width;
+    double deviceWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: () {
@@ -107,7 +107,7 @@ class ChatCard extends StatelessWidget {
                         ),
                         Container(
                           padding: const EdgeInsets.only(right: 12.0),
-                          width: c_width - 111,
+                          width: deviceWidth - 111,
                           height: 45,
                           child: new Text(
                             "Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, Xe dơ có bụi ngay ghế, ",

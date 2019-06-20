@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'custom_feedback.dart';
 import 'feedback_item.dart';
+import 'model/feedback_app_model.dart';
 
 enum FieldReport {
   Bus,
@@ -95,186 +97,191 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      // persistentFooterButtons: <Widget>[
-      //   ClipOval(
-      //     child: Container(
-      //       color: Colors.red,
-      //       child: IconButton(
-      //         icon: Image.asset(
-      //           "assets/danger.png",
-      //         ),
-      //         onPressed: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(
-      //               builder: (context) => CreateFeedback(),
-      //             ),
-      //           );
-      //         },
-      //       ),
-      //     ),
-      //   ),
-      //   ClipOval(
-      //     child: Container(
-      //       color: Colors.red,
-      //       child: IconButton(
-      //         icon: Image.asset(
-      //           "assets/police.png",
-      //         ),
-      //         onPressed: () {
-      //           launch("tel://84981722293");
-      //         },
-      //       ),
-      //     ),
-      //   ),
-      // ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => FeedbackAppModel()),
+      ],
+      child: Scaffold(
+        key: _scaffoldKey,
+        // persistentFooterButtons: <Widget>[
+        //   ClipOval(
+        //     child: Container(
+        //       color: Colors.red,
+        //       child: IconButton(
+        //         icon: Image.asset(
+        //           "assets/danger.png",
+        //         ),
+        //         onPressed: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (context) => CreateFeedback(),
+        //             ),
+        //           );
+        //         },
+        //       ),
+        //     ),
+        //   ),
+        //   ClipOval(
+        //     child: Container(
+        //       color: Colors.red,
+        //       child: IconButton(
+        //         icon: Image.asset(
+        //           "assets/police.png",
+        //         ),
+        //         onPressed: () {
+        //           launch("tel://84981722293");
+        //         },
+        //       ),
+        //     ),
+        //   ),
+        // ],
 
-      bottomNavigationBar: Container(
-        child: Center(child: Text("Alo alo đây là thông báo")),
-        color: Color.fromRGBO(200, 200, 200, 1),
-        height: 45,
-      ),
+        bottomNavigationBar: Container(
+          child: Center(child: Text("Alo alo đây là thông báo")),
+          color: Color.fromRGBO(200, 200, 200, 1),
+          height: 45,
+        ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CustomFeedback(),
-            ),
-          );
-        },
-        child: Icon(Icons.speaker_notes),
-        backgroundColor: Colors.blue,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CustomFeedback(),
+              ),
+            );
+          },
+          child: Icon(Icons.speaker_notes),
+          backgroundColor: Colors.blue,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
-      // floatingActionButton: Container(
-      //   // width: 200.0,
-      //   decoration: BoxDecoration(
-      //     color: Colors.blue,
-      //     borderRadius: BorderRadius.circular(
-      //       12.0,
-      //     ),
-      //   ),
-      //   // height: 200.0,
-      //   child: RawMaterialButton(
-      //     shape: new CircleBorder(),
-      //     elevation: 0.0,
-      //     onPressed: () {
-      //       Navigator.push(
-      //         context,
-      //         MaterialPageRoute(
-      //           builder: (context) => CustomFeedback(),
-      //         ),
-      //       );
-      //     },
-      //     child: IntrinsicWidth(
-      //       child: Padding(
-      //         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      //         child: Row(
-      //           children: <Widget>[
-      //             Icon(
-      //               Icons.speaker_notes,
-      //               color: Colors.white,
-      //               size: 25,
-      //             ),
-      //             Padding(
-      //               padding: EdgeInsets.only(left: 10),
-      //             ),
-      //             Text(
-      //               "Gửi phản ánh mới",
-      //               style: TextStyle(
-      //                 fontSize: 16,
-      //                 fontWeight: FontWeight.w500,
-      //                 color: Colors.white,
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color: Colors.blue,
-              child: SafeArea(
-                bottom: false,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    widget.hasDrawer
-                        ? BackButton(
-                            color: Colors.white,
-                          )
-                        : SizedBox(
-                            height: 24,
-                            width: 24,
-                          ),
-                    Expanded(
-                      child: TextField(
-                        // scrollPadding: EdgeInsets.all(0),
-                        style: new TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                        ),
-                        decoration: new InputDecoration(
-                          fillColor: Colors.white,
-                          hintText: 'Tìm kiếm',
-                          hintStyle: TextStyle(
+        // floatingActionButton: Container(
+        //   // width: 200.0,
+        //   decoration: BoxDecoration(
+        //     color: Colors.blue,
+        //     borderRadius: BorderRadius.circular(
+        //       12.0,
+        //     ),
+        //   ),
+        //   // height: 200.0,
+        //   child: RawMaterialButton(
+        //     shape: new CircleBorder(),
+        //     elevation: 0.0,
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => CustomFeedback(),
+        //         ),
+        //       );
+        //     },
+        //     child: IntrinsicWidth(
+        //       child: Padding(
+        //         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        //         child: Row(
+        //           children: <Widget>[
+        //             Icon(
+        //               Icons.speaker_notes,
+        //               color: Colors.white,
+        //               size: 25,
+        //             ),
+        //             Padding(
+        //               padding: EdgeInsets.only(left: 10),
+        //             ),
+        //             Text(
+        //               "Gửi phản ánh mới",
+        //               style: TextStyle(
+        //                 fontSize: 16,
+        //                 fontWeight: FontWeight.w500,
+        //                 color: Colors.white,
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                color: Colors.blue,
+                child: SafeArea(
+                  bottom: false,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      widget.hasDrawer
+                          ? BackButton(
+                              color: Colors.white,
+                            )
+                          : SizedBox(
+                              height: 24,
+                              width: 24,
+                            ),
+                      Expanded(
+                        child: TextField(
+                          // scrollPadding: EdgeInsets.all(0),
+                          style: new TextStyle(
                             fontSize: 16.0,
                             color: Colors.white,
                           ),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                            top: 15.0,
-                          ),
+                          decoration: new InputDecoration(
+                            fillColor: Colors.white,
+                            hintText: 'Tìm kiếm',
+                            hintStyle: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                              top: 15.0,
+                            ),
 
-                          // prefixIcon: Icon(
-                          //   Icons.search,
-                          //   color: Colors.white,
-                          // ),
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: Colors.white,
+                            // prefixIcon: Icon(
+                            //   Icons.search,
+                            //   color: Colors.white,
+                            // ),
+                            suffixIcon: Icon(
+                              Icons.search,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.only(top: 5, bottom: 70),
-                itemCount: listReportInfo.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return FeedbackItem(
-                    reportInfo: listReportInfo[index],
-                  );
-                },
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.only(top: 5, bottom: 70),
+                  itemCount: listReportInfo.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return FeedbackItem(
+                      reportInfo: listReportInfo[index],
+                    );
+                  },
+                ),
+                // ListView(
+                //   padding: EdgeInsets.only(top: 5, bottom: 70),
+                //   children: <Widget>[
+                //     ChatCard(),
+                //     ChatCard(),
+                //     ChatCard(),
+                //     ChatCard(),
+                //     ChatCard(),
+                //   ],
+                // ),
               ),
-              // ListView(
-              //   padding: EdgeInsets.only(top: 5, bottom: 70),
-              //   children: <Widget>[
-              //     ChatCard(),
-              //     ChatCard(),
-              //     ChatCard(),
-              //     ChatCard(),
-              //     ChatCard(),
-              //   ],
-              // ),
-            ),
-          ],
+            ],
+          ),
+          color: Color.fromRGBO(0, 0, 0, 0.03),
         ),
-        color: Color.fromRGBO(0, 0, 0, 0.03),
       ),
     );
   }

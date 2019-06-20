@@ -6,7 +6,6 @@ import 'select_category.dart';
 class CustomFeedback extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: SafeArea(
         child: Container(

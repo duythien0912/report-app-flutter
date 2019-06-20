@@ -40,7 +40,7 @@ class FeedbackItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // DateTime now = new DateTime.now();
     // DateTime date = new DateTime(now.year, now.month, now.day);
-    double c_width = MediaQuery.of(context).size.width;
+    double deviceWidth = MediaQuery.of(context).size.width;
 
     double triSize = 30;
 
@@ -105,8 +105,8 @@ class FeedbackItem extends StatelessWidget {
                     children: <Widget>[
                       ClipOval(
                         child: Container(
-                          height: c_width / 5,
-                          width: c_width / 5,
+                          height: deviceWidth / 5,
+                          width: deviceWidth / 5,
                           // padding: EdgeInsets.all(8),
                           decoration: new BoxDecoration(
                             color: Colors.black12,
@@ -134,13 +134,13 @@ class FeedbackItem extends StatelessWidget {
                               reportInfo.image == null
                                   ? Image.asset(
                                       "assets/holder.png",
-                                      height: c_width / 5,
-                                      width: c_width / 5,
+                                      height: deviceWidth / 5,
+                                      width: deviceWidth / 5,
                                       fit: BoxFit.fitHeight,
                                     )
                                   : FadeInImage.assetNetwork(
-                                      height: c_width / 5,
-                                      width: c_width / 5,
+                                      height: deviceWidth / 5,
+                                      width: deviceWidth / 5,
                                       fit: BoxFit.fitHeight,
                                       placeholder: 'assets/holder.png',
                                       image: reportInfo.image,
@@ -200,7 +200,7 @@ class FeedbackItem extends StatelessWidget {
                             ),
                             Container(
                               padding: const EdgeInsets.only(right: 12.0),
-                              width: c_width - 111,
+                              width: deviceWidth - 111,
                               // height: 45,
                               child: new Text(
                                 reportInfo.reportContent,

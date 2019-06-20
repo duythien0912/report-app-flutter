@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'main.dart';
+import 'model/feedback_app_model.dart';
 import 'upload_box.dart';
 
 class PickImageRow extends StatefulWidget {
@@ -18,7 +18,7 @@ enum ConfirmAction { CAMERA, GALLERY }
 class _PickImageRowState extends State<PickImageRow> {
   @override
   Widget build(BuildContext context) {
-    final MainModel mainModel = Provider.of<MainModel>(context);
+    final FeedbackAppModel mainModel = Provider.of<FeedbackAppModel>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

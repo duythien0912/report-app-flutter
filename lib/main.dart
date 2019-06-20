@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,17 +5,6 @@ import 'package:provider/provider.dart';
 import 'feedback_page.dart';
 
 // import 'package:flutter/services.dart';
-
-class MainModel with ChangeNotifier {
-  List<File> _listImage = [];
-
-  List<File> get listImage => _listImage;
-
-  void pushToListImage(File newFile) {
-    _listImage.add(newFile);
-    notifyListeners();
-  }
-}
 
 void main() {
   Provider.debugCheckInvalidValueType = null;
@@ -33,19 +20,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => MainModel()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-            // primarySwatch: Colors.green,
-            // accentColorBrightness: Brightness.light,
-            ),
-        home: FeedbackPage(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+          // primarySwatch: Colors.green,
+          // accentColorBrightness: Brightness.light,
+          ),
+      home: FeedbackPage(),
     );
   }
 }

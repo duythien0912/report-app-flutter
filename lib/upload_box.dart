@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import 'main.dart';
+import 'model/feedback_app_model.dart';
 
 class UploadBox extends StatefulWidget {
   const UploadBox({
@@ -33,7 +33,7 @@ class _UploadBoxState extends State<UploadBox> {
     });
   }
 
-  Future getImage(MainModel mainModel) async {
+  Future getImage(FeedbackAppModel mainModel) async {
     showDemoActionSheet(
       context: context,
       child: CupertinoActionSheet(
@@ -84,7 +84,7 @@ class _UploadBoxState extends State<UploadBox> {
     double width = MediaQuery.of(context).size.width;
 
     double widthMinus = width - 16 * 2 - 6 * 3;
-    final MainModel mainModel = Provider.of<MainModel>(context);
+    final FeedbackAppModel mainModel = Provider.of<FeedbackAppModel>(context);
 
     return GestureDetector(
       onTap: () {
