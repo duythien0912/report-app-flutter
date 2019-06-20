@@ -44,6 +44,8 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  int currentPage = 0;
+
   List<ReportInfoItem> listReportInfo = [
     ReportInfoItem(
       fieldReport: FieldReport.Bus,
@@ -123,53 +125,74 @@ class _ChatPageState extends State<ChatPage> {
       //     ),
       //   ),
       // ],
-      floatingActionButton: Container(
-        // width: 200.0,
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(
-            12.0,
-          ),
-        ),
-        // height: 200.0,
-        child: RawMaterialButton(
-          shape: new CircleBorder(),
-          elevation: 0.0,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CustomFeedback(),
-              ),
-            );
-          },
-          child: IntrinsicWidth(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.speaker_notes,
-                    color: Colors.white,
-                    size: 25,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                  ),
-                  Text(
-                    "Gửi phản ánh mới",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+
+      bottomNavigationBar: Container(
+        child: Center(child: Text("Alo alo đây là thông báo")),
+        color: Color.fromRGBO(200, 200, 200, 1),
+        height: 45,
       ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomFeedback(),
+            ),
+          );
+        },
+        child: Icon(Icons.speaker_notes),
+        backgroundColor: Colors.blue,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+
+      // floatingActionButton: Container(
+      //   // width: 200.0,
+      //   decoration: BoxDecoration(
+      //     color: Colors.blue,
+      //     borderRadius: BorderRadius.circular(
+      //       12.0,
+      //     ),
+      //   ),
+      //   // height: 200.0,
+      //   child: RawMaterialButton(
+      //     shape: new CircleBorder(),
+      //     elevation: 0.0,
+      //     onPressed: () {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (context) => CustomFeedback(),
+      //         ),
+      //       );
+      //     },
+      //     child: IntrinsicWidth(
+      //       child: Padding(
+      //         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      //         child: Row(
+      //           children: <Widget>[
+      //             Icon(
+      //               Icons.speaker_notes,
+      //               color: Colors.white,
+      //               size: 25,
+      //             ),
+      //             Padding(
+      //               padding: EdgeInsets.only(left: 10),
+      //             ),
+      //             Text(
+      //               "Gửi phản ánh mới",
+      //               style: TextStyle(
+      //                 fontSize: 16,
+      //                 fontWeight: FontWeight.w500,
+      //                 color: Colors.white,
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: Container(
         child: Column(
           children: <Widget>[
