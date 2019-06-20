@@ -1,10 +1,10 @@
-import 'package:feedback_app/chat_page.dart';
 import 'package:flutter/material.dart';
 
+import 'feedback_page.dart';
 import 'page/message_page.dart';
 
-class ChatCard extends StatelessWidget {
-  const ChatCard({
+class FeedbackItem extends StatelessWidget {
+  const FeedbackItem({
     Key key,
     this.reportInfo,
   }) : super(key: key);

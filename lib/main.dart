@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'chat_page.dart';
+import 'feedback_page.dart';
+
 // import 'package:flutter/services.dart';
 
 class MainModel with ChangeNotifier {
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
             // primarySwatch: Colors.green,
             // accentColorBrightness: Brightness.light,
             ),
-        home: ChatPage(),
+        home: FeedbackPage(),
       ),
     );
   }

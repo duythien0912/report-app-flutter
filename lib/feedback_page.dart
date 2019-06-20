@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'chat_card_2.dart';
 import 'custom_feedback.dart';
+import 'feedback_item.dart';
 
 enum FieldReport {
   Bus,
@@ -18,13 +18,6 @@ enum ProcessingStatus {
 }
 
 class ReportInfoItem {
-  FieldReport fieldReport;
-  String timeHasPassed;
-  String busStopName;
-  String reportContent;
-  String image;
-  ProcessingStatus processingStatus;
-
   ReportInfoItem({
     this.fieldReport,
     this.timeHasPassed,
@@ -33,19 +26,29 @@ class ReportInfoItem {
     this.image,
     this.processingStatus,
   });
+
+  String busStopName;
+  FieldReport fieldReport;
+  String image;
+  ProcessingStatus processingStatus;
+  String reportContent;
+  String timeHasPassed;
 }
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({Key key}) : super(key: key);
+class FeedbackPage extends StatefulWidget {
+  const FeedbackPage({
+    Key key,
+    this.hasDrawer = false,
+  }) : super(key: key);
+
+  final bool hasDrawer;
 
   @override
-  _ChatPageState createState() => _ChatPageState();
+  _FeedbackPageState createState() => _FeedbackPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+class _FeedbackPageState extends State<FeedbackPage> {
   int currentPage = 0;
-
   List<ReportInfoItem> listReportInfo = [
     ReportInfoItem(
       fieldReport: FieldReport.Bus,
@@ -87,6 +90,8 @@ class _ChatPageState extends State<ChatPage> {
       timeHasPassed: "15 giây trước",
     ),
   ];
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -204,15 +209,14 @@ class _ChatPageState extends State<ChatPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // !_scaffoldKey.currentState.hasDrawer
-                    //     ? BackButton(
-                    //         color: Colors.white,
-                    //       )
-                    //     :
-                    SizedBox(
-                      height: 24,
-                      width: 24,
-                    ),
+                    widget.hasDrawer
+                        ? BackButton(
+                            color: Colors.white,
+                          )
+                        : SizedBox(
+                            height: 24,
+                            width: 24,
+                          ),
                     Expanded(
                       child: TextField(
                         // scrollPadding: EdgeInsets.all(0),
@@ -252,7 +256,7 @@ class _ChatPageState extends State<ChatPage> {
                 padding: EdgeInsets.only(top: 5, bottom: 70),
                 itemCount: listReportInfo.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ChatCard(
+                  return FeedbackItem(
                     reportInfo: listReportInfo[index],
                   );
                 },
