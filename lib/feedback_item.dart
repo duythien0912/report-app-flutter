@@ -59,7 +59,9 @@ class FeedbackItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MessagePage(),
+            builder: (context) => MessagePage(
+                  reportInfo: reportInfo,
+                ),
           ),
         );
       },
