@@ -39,9 +39,11 @@ class FeedbackPage extends StatefulWidget {
   const FeedbackPage({
     Key key,
     this.hasDrawer = false,
+    this.urlApi = '',
   }) : super(key: key);
 
   final bool hasDrawer;
+  final String urlApi;
 
   @override
   _FeedbackPageState createState() => _FeedbackPageState();
