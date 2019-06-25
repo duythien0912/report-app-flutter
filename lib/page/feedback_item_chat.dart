@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../feedback_page.dart';
-import 'message_page.dart';
 
 class FeedbackItemChat extends StatefulWidget {
   const FeedbackItemChat({
@@ -45,8 +44,6 @@ class _FeedbackItemChatState extends State<FeedbackItemChat> {
 
   @override
   Widget build(BuildContext context) {
-    // DateTime now = new DateTime.now();
-    // DateTime date = new DateTime(now.year, now.month, now.day);
     double deviceWidth = MediaQuery.of(context).size.width;
 
     double triSize = 30;
@@ -63,14 +60,6 @@ class _FeedbackItemChatState extends State<FeedbackItemChat> {
 
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => MessagePage(
-        //           reportInfo: reportInfo,
-        //         ),
-        //   ),
-        // );
         setState(() {
           isShowFull = !isShowFull;
         });
@@ -79,33 +68,17 @@ class _FeedbackItemChatState extends State<FeedbackItemChat> {
         margin: EdgeInsets.only(
           bottom: 0,
         ),
-        // height: 110,
         child: Stack(
-          // fit: StackFit.passthrough,
           children: <Widget>[
             Container(
               width: double.infinity,
               child: new Card(
-                // borderOnForeground: true,
                 child: Column(
                   children: <Widget>[
                     new Container(
                       decoration: new BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
-                          // new BoxShadow(
-                          //   blurRadius: 3.0,
-                          //   offset: new Offset(0.0, 3.0),
-                          //   spreadRadius: 0.5,
-                          //   color: Colors.black12,
-                          // ),
-                        ],
-                        // border: Border(
-                        //   bottom: BorderSide(
-                        //     width: 2.0,
-                        //     color: colorReport,
-                        //   ),
-                        // ),
+                        boxShadow: [],
                       ),
                       padding: new EdgeInsets.only(
                         top: 12.0,
@@ -119,50 +92,25 @@ class _FeedbackItemChatState extends State<FeedbackItemChat> {
                         children: <Widget>[
                           ClipOval(
                             child: Container(
-                              height: deviceWidth / 5,
-                              width: deviceWidth / 5,
-                              // padding: EdgeInsets.all(8),
+                              height: 60,
+                              width: 60,
                               decoration: new BoxDecoration(
                                 color: Colors.black12,
-                                // image: DecorationImage(
-                                //   fit: BoxFit.fitHeight,
-                                //   image: reportInfo.image == null
-                                //       ? AssetImage("assets/holder.png")
-                                //       : NetworkImage(
-                                //           reportInfo.image,
-                                //         ),
-                                // ),
-                                // boxShadow: [
-                                //   new BoxShadow(
-                                //     // offset: Offset(1, 3),
-                                //     spreadRadius: 1,
-                                //     color: Colors.black12,
-                                //     blurRadius: 3.0,
-                                //   ),
-                                // ],
                               ),
-                              child:
-                                  // FlutterLogo(
-                                  //   size: 35,
-                                  // ),
-                                  widget.reportInfo.image == null
-                                      ? Image.asset(
-                                          "assets/holder.png",
-                                          height: deviceWidth / 5,
-                                          width: deviceWidth / 5,
-                                          fit: BoxFit.fitHeight,
-                                        )
-                                      : FadeInImage.assetNetwork(
-                                          height: deviceWidth / 5,
-                                          width: deviceWidth / 5,
-                                          fit: BoxFit.fitHeight,
-                                          placeholder: 'assets/holder.png',
-                                          image: widget.reportInfo.image,
-                                        ),
-                              //     SizedBox(
-                              //   height: 50,
-                              //   width: 50,
-                              // ),
+                              child: widget.reportInfo.image == null
+                                  ? Image.asset(
+                                      "assets/holder.png",
+                                      height: deviceWidth / 5,
+                                      width: deviceWidth / 5,
+                                      fit: BoxFit.fitHeight,
+                                    )
+                                  : FadeInImage.assetNetwork(
+                                      height: deviceWidth / 5,
+                                      width: deviceWidth / 5,
+                                      fit: BoxFit.fitHeight,
+                                      placeholder: 'assets/holder.png',
+                                      image: widget.reportInfo.image,
+                                    ),
                             ),
                           ),
                           Padding(
@@ -175,64 +123,73 @@ class _FeedbackItemChatState extends State<FeedbackItemChat> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    new CategoryText(
-                                      fieldReport:
-                                          widget.reportInfo.fieldReport,
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(right: 25),
-                                      child: TimeText(
-                                          timeHasPassed:
-                                              widget.reportInfo.timeHasPassed),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.location_on,
-                                          size: 20,
-                                          color: Colors.red,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 5),
-                                        ),
-                                        Text(
-                                          widget.reportInfo.busStopName,
-                                          style: TextStyle(
-                                            // fontSize: 12,
-                                            fontWeight: FontWeight.w600,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          new CategoryText(
+                                            fieldReport:
+                                                widget.reportInfo.fieldReport,
                                           ),
-                                        ),
-                                      ],
+                                          Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.location_on,
+                                                size: 20,
+                                                color: Colors.red,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 3),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  widget.reportInfo.busStopName,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(right: 25),
-                                      child: StatusText(
-                                          statusReport: statusReport,
-                                          colorReport: colorReport),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          TimeText(
+                                              timeHasPassed: widget
+                                                  .reportInfo.timeHasPassed),
+                                          Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                          ),
+                                          StatusText(
+                                              statusReport: statusReport,
+                                              colorReport: colorReport),
+                                        ],
+                                      ),
                                     ),
-
-                                    // statusReport: statusReport
                                   ],
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 5),
                                 ),
                                 Container(
-                                  // padding: const EdgeInsets.only(right: 12.0),
                                   width: deviceWidth - 111,
-                                  // height: 45,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -272,37 +229,6 @@ class _FeedbackItemChatState extends State<FeedbackItemChat> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(4.0),
-            //   child: Container(
-            //     alignment: Alignment(1, 1),
-            //     child: Container(
-            //       height: triSize,
-            //       width: triSize,
-            //       color: colorReport,
-            //       child: Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(4),
-            //   child: Container(
-            //     alignment: Alignment(1, 1),
-            //     child: ClipPath(
-            //       clipBehavior: Clip.hardEdge,
-            //       clipper: TriangleClipper(),
-            //       child: Container(
-            //         height: triSize,
-            //         width: triSize,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // new HorizontalTextBar(
-            //     colorReport: colorReport, statusReport: statusReport),
           ],
         ),
       ),
@@ -381,11 +307,11 @@ class CategoryText extends StatelessWidget {
               "assets/bus.png",
               fit: BoxFit.cover,
             );
+
           if (type == 'text')
             return Text(
               'Xe bus',
               style: TextStyle(
-                // fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             );
@@ -395,15 +321,20 @@ class CategoryText extends StatelessWidget {
       case FieldReport.App:
         {
           if (type == 'image')
-            return Image.asset(
-              "assets/app1.png",
-              fit: BoxFit.cover,
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: 4.0,
+                right: 4,
+              ),
+              child: Image.asset(
+                "assets/app1.png",
+                fit: BoxFit.cover,
+              ),
             );
           if (type == 'text')
             return Text(
               'Ứng dụng',
               style: TextStyle(
-                // fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             );
@@ -421,7 +352,6 @@ class CategoryText extends StatelessWidget {
             return Text(
               'Tài xế',
               style: TextStyle(
-                // fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             );
@@ -439,7 +369,6 @@ class CategoryText extends StatelessWidget {
             return Text(
               'Bến xe',
               style: TextStyle(
-                // fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             );
@@ -457,7 +386,6 @@ class CategoryText extends StatelessWidget {
             return Text(
               'Khác',
               style: TextStyle(
-                // fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             );
@@ -476,12 +404,18 @@ class CategoryText extends StatelessWidget {
     return Row(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(right: 5),
-          // height: 20,
+          // margin: EdgeInsets.only(right: 5),
           height: 20,
-          child: selectImage("image"),
+          child: Center(
+            child: selectImage("image"),
+          ),
         ),
-        selectImage('text'),
+        Padding(
+          padding: EdgeInsets.only(left: 3),
+        ),
+        Expanded(
+          child: selectImage('text'),
+        ),
       ],
     );
   }
@@ -510,7 +444,6 @@ class TimeText extends StatelessWidget {
         Text(
           timeHasPassed,
           style: TextStyle(
-            // fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -526,23 +459,21 @@ class StatusText extends StatelessWidget {
     this.colorReport,
   }) : super(key: key);
 
-  final String statusReport;
   final Color colorReport;
+  final String statusReport;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        // Icon(
-        //   Icons.access_time,
-        //   size: 20,
-        //   color: colorReport,
-        // ),
-        ClipOval(
-          child: Container(
-            color: colorReport,
-            height: 15,
-            width: 15,
+        Padding(
+          padding: EdgeInsets.only(left: 2, right: 2),
+          child: ClipOval(
+            child: Container(
+              color: colorReport,
+              height: 16,
+              width: 16,
+            ),
           ),
         ),
         Padding(
@@ -551,7 +482,6 @@ class StatusText extends StatelessWidget {
         Text(
           statusReport,
           style: TextStyle(
-            // fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
         ),

@@ -293,7 +293,7 @@ class ChatMessage extends StatelessWidget {
           parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: Container(
-        // margin: const EdgeInsets.symmetric(vertical: 0.0),
+        margin: const EdgeInsets.symmetric(vertical: 2.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -339,30 +339,49 @@ class ChatMessage extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 5.0),
                       child: Text(text),
                     ),
+                    Text(
+                      "4:19 CH, 12 tháng 6",
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontSize: 10,
+                      ),
+                    ),
                   ],
                 ),
               ),
             if (typeChat == TypeChat.User && fileChat != null)
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(
-                    top: 8,
-                    bottom: 8,
-                    left: 12,
-                    right: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: Color.fromRGBO(240, 240, 240, 1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                        top: 8,
+                        bottom: 8,
+                        left: 8,
+                        right: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Color.fromRGBO(240, 240, 240, 1),
+                        ),
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                        borderRadius: BorderRadius.circular(
+                          14.0,
+                        ),
+                      ),
+                      margin: const EdgeInsets.only(top: 5.0),
+                      child: Image.file(fileChat),
                     ),
-                    color: Color.fromRGBO(240, 240, 240, 1),
-                    borderRadius: BorderRadius.circular(
-                      14.0,
+                    Text(
+                      "4:19 CH, 12 tháng 6",
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontSize: 10,
+                      ),
                     ),
-                  ),
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: Image.file(fileChat),
+                  ],
                 ),
               ),
 
@@ -403,6 +422,17 @@ class ChatMessage extends StatelessWidget {
                       ),
                       margin: const EdgeInsets.only(top: 5.0),
                       child: Text(text),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text(
+                        "4:19 CH, 12 tháng 6",
+                        style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
                   ],
                 ),

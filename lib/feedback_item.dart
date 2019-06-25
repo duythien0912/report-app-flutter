@@ -107,8 +107,8 @@ class FeedbackItem extends StatelessWidget {
                     children: <Widget>[
                       ClipOval(
                         child: Container(
-                          height: deviceWidth / 5,
-                          width: deviceWidth / 5,
+                          height: 60,
+                          width: 60,
                           // padding: EdgeInsets.all(8),
                           decoration: new BoxDecoration(
                             color: Colors.black12,
@@ -355,9 +355,15 @@ class CategoryText extends StatelessWidget {
       case FieldReport.App:
         {
           if (type == 'image')
-            return Image.asset(
-              "assets/app1.png",
-              fit: BoxFit.cover,
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: 4.0,
+                right: 4,
+              ),
+              child: Image.asset(
+                "assets/app1.png",
+                fit: BoxFit.cover,
+              ),
             );
           if (type == 'text')
             return Text(
