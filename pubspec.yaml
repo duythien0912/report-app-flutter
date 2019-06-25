@@ -1,9 +1,9 @@
 name: pika_feedback_app
 description: this is feedback small app of pika company please use and review it thank you.
-homepage: https://github.com/duythien0912/report-app-flutter
+homepage: http://pikatech.vn
 author: Duy Thien <duythien0912@gmail.com>
 
-version: 1.0.0+4
+version: 1.0.0+6
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -13,12 +13,9 @@ dependencies:
     sdk: flutter
   url_launcher: ^5.0.3 
   provider: ^3.0.0+1 
-  cupertino_icons: ^0.1.2 
   image_picker: ^0.6.0+9
-  
+
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
 
 
@@ -33,7 +30,7 @@ flutter:
   uses-material-design: true
 
   
-  assets:
+  assets: 
     - assets/
 
   

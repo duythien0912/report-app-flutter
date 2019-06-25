@@ -1,3 +1,11 @@
+## 1.0.0+6
+
+* Update home page
+
+## 1.0.0+5
+
+* Update example
+
 ## 1.0.0+4
 
 * Change model to new folder
